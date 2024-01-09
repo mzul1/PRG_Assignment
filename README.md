@@ -1,2 +1,2 @@
 # PRG Assignment
-i LOVE programming (kms)
+i LOVE python programming
