@@ -1,0 +1,14 @@
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\S10262474_PRG2Assignment.GeneratedMSBuildEditorConfig.editorconfig
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\S10262474_PRG2Assignment.AssemblyInfoInputs.cache
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\S10262474_PRG2Assignment.AssemblyInfo.cs
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\S10262474_PRG2Assignment.csproj.CoreCompileInputs.cache
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\bin\Debug\net6.0\S10262474_PRG2Assignment.exe
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\bin\Debug\net6.0\S10262474_PRG2Assignment.deps.json
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\bin\Debug\net6.0\S10262474_PRG2Assignment.runtimeconfig.json
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\bin\Debug\net6.0\S10262474_PRG2Assignment.dll
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\bin\Debug\net6.0\S10262474_PRG2Assignment.pdb
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\S10262474_PRG2Assignment.dll
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\refint\S10262474_PRG2Assignment.dll
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\S10262474_PRG2Assignment.pdb
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\S10262474_PRG2Assignment.genruntimeconfig.cache
+D:\Ngee-AnnPolytechnics-ICT\Programming II\Assignment\S10262474_PRG2Assignment\S10262474_PRG2Assignment\obj\Debug\net6.0\ref\S10262474_PRG2Assignment.dll
