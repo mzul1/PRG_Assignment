@@ -33,19 +33,19 @@ public class Program
             }
             else
             {
-                Console.WriteLine($"Order ID {order.Id} not found in member mapping."); // Debug line
-                continue;  // Skip this order if no member mapping is found
+                Console.WriteLine($"Order ID {order.Id} not found in member mapping.");
+                continue;
             }
 
             if (IsGoldMember(memberId))
             {
                 goldMemberQueue.Enqueue(order);
-                Console.WriteLine($"Order {order.Id} enqueued in Gold Member Queue.");  // Debug line
+                Console.WriteLine($"Order {order.Id} enqueued in Gold Member Queue."); 
             }
             else
             {
                 regularQueue.Enqueue(order);
-                Console.WriteLine($"Order {order.Id} enqueued in Regular Queue.");  // Debug line
+                Console.WriteLine($"Order {order.Id} enqueued in Regular Queue.");
             }
         }
 
@@ -116,7 +116,7 @@ public class Program
         var orders = new List<Order>();
         var lines = File.ReadAllLines(filePath);
 
-        foreach (var line in lines.Skip(1)) // Skip the header
+        foreach (var line in lines.Skip(1)) // To skip headers
         {
             var parts = line.Split(',');
             int orderId = int.Parse(parts[0]);
@@ -127,7 +127,7 @@ public class Program
             int scoops = int.Parse(parts[5]);
             bool dipped = parts[6].ToLower() == "true";
             string waffleFlavour = parts[7];
-            List<Flavour> iceCreamFlavours = new List<Flavour>(); // Assuming Flavour class has a constructor that takes a string
+            List<Flavour> iceCreamFlavours = new List<Flavour>(); 
             for (int i = 8; i <= 10; i++)
             {
                 if (!string.IsNullOrWhiteSpace(parts[i]))
@@ -136,7 +136,7 @@ public class Program
                 }
             }
 
-            List<Topping> iceCreamToppings = new List<Topping>(); // Assuming Topping class has a constructor that takes a string
+            List<Topping> iceCreamToppings = new List<Topping>();
             for (int i = 11; i <= 14; i++)
             {
                 if (!string.IsNullOrWhiteSpace(parts[i]))
@@ -158,11 +158,11 @@ public class Program
                     iceCream = new Waffle(scoops, iceCreamFlavours, iceCreamToppings, waffleFlavour);
                     break;
                 default:
-                    continue; // Skip if the option is not recognized
+                    continue;
             }
 
             Order order = new Order(orderId, timeReceived);
-            order.AddIceCream(iceCream); // Assuming Order has an AddIceCream method
+            order.AddIceCream(iceCream); 
             orderToMemberMapping[orderId] = memberId;
 
             orders.Add(order);
