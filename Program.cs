@@ -108,7 +108,7 @@ public class Program
 
     private static bool IsGoldMember(int memberId)
     {
-        return customers.ContainsKey(memberId) && customers[memberId].Rewards.Tier == MembershipStatus.Gold;
+        return customers.ContainsKey(memberId) && customers[memberId].Rewards.Tier == "Gold";
     }
 
     private static List<Order> ReadOrdersFromCSV(string filePath)
