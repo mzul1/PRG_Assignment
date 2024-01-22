@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,46 +6,56 @@ using System.Threading.Tasks;
 
 namespace S10262474_PRG2Assignment
 {
-    public class Customer
+    class Customer
     {
         public string Name { get; set; }
         public int MemberId { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime Dob { get; set; }
         public Order CurrentOrder { get; set; }
-        public List<Order> OrderHistory { get; set; }
+        public List<Order> OrderHistory { get; set; } = new List<Order>();
         public PointCard Rewards { get; set; }
-
-        public Customer()
-        {
-            OrderHistory = new List<Order>();
-            Rewards = new PointCard();
-        }
-
-        public Customer(string name, int memberId, DateTime dob) : this()
+        public Customer() { }
+        public Customer(string name, int memberId, DateTime dob)
         {
             Name = name;
             MemberId = memberId;
-            DateOfBirth = dob;
-            OrderHistory = new List<Order>();
-            Rewards = new PointCard();
+            Dob = dob;
         }
-
         public Order MakeOrder()
         {
-            CurrentOrder = new Order();
-            return CurrentOrder;
+            Console.WriteLine("Enter order id: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+            foreach (Order o in OrderHistory)
+            {
+                if (o.Id == id)
+                {
+                    Console.WriteLine("Order exists!");
+                    return null;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            DateTime timeReceived = DateTime.Now;
+            return new Order(id, timeReceived);
         }
-
         public bool IsBirthday()
         {
-            return DateTime.Today.Month == DateOfBirth.Month && DateTime.Today.Day == DateOfBirth.Day;
+            int month = Dob.Month;
+            int day = Dob.Year;
+            if (month == DateTime.Now.Month && day == DateTime.Now.Day)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
         public override string ToString()
         {
-            return $"Customer: {Name}, Member ID: {MemberId}, Date of Birth: {DateOfBirth.ToShortDateString()}, {Rewards}";
+            return "Name: " + Name + "\tMember ID: " + MemberId + "\tDate Of Birth: " + Dob;
         }
-
-        
     }
 }
