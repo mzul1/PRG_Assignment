@@ -6,73 +6,39 @@ using System.Threading.Tasks;
 
 namespace S10262474_PRG2Assignment
 {
-    public enum MembershipStatus
-    {
-        Ordinary,
-        Silver,
-        Gold
-    }
-    public class PointCard
+    class PointCard
     {
         public int Points { get; set; }
         public int PunchCard { get; set; }
-        public MembershipStatus Tier { get; set; }
-
-        public PointCard()
+        public string Tier { get; set; }
+        public PointCard() { }
+        public PointCard(int points, int punchCard)
         {
-            Points = 0;
-            PunchCard = 0;
-            Tier = MembershipStatus.Ordinary;
+            Points = points;
+            PunchCard = punchCard;
         }
-
-        public void AddPoints(int pointsToAdd)
+        public void AddPoints(int points)
         {
-            Points += pointsToAdd;
-            UpdateTier();
+            Points += points;
         }
-
-        public void RedeemPoints(int pointsToRedeem)
+        public void RedeemPoints(int points)
         {
-            if (Tier == MembershipStatus.Silver || Tier == MembershipStatus.Gold)
+            Points -= points;
+        }
+        public void Punch()
+        {
+            if (PunchCard < 11)
             {
-                Points -= pointsToRedeem;
-                if (Points < 0)
-                {
-                    Points = 0;
-                }
+                PunchCard++;
             }
             else
             {
-                throw new InvalidOperationException("Only Silver and Gold members can redeem points.");
+                PunchCard = 0;
             }
         }
-
-        public void Punch()
-        {
-            PunchCard++;
-            if (PunchCard >= 10)
-            {
-                PunchCard = 0; 
-            }
-        }
-
-        private void UpdateTier()
-        {
-            if (Points >= 100 && Tier != MembershipStatus.Gold)
-            {
-                Tier = MembershipStatus.Gold;
-            }
-            else if (Points >= 50 && Tier == MembershipStatus.Ordinary)
-            {
-                Tier = MembershipStatus.Silver;
-            }
-            
-        }
-
         public override string ToString()
         {
-            //return $"Points: {Points}, PunchCard: {PunchCard}, Tier: {Tier}";
-            return $"Membership Status: {Tier}, Membership Points: {Points}, PunchCard: {PunchCard}";
+            return "Points: " + Points + "\tPunch Card: " + PunchCard + "\tTier: " + Tier;
         }
     }
 }
