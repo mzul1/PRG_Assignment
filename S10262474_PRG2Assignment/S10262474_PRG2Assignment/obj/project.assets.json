@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Ngee-AnnPolytechnics-ICT\\Programming II\\Assignment\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment.csproj",
+      "projectUniqueName": "C:\\Users\\65883\\Desktop\\Programming\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment.csproj",
       "projectName": "S10262474_PRG2Assignment",
-      "projectPath": "D:\\Ngee-AnnPolytechnics-ICT\\Programming II\\Assignment\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment.csproj",
+      "projectPath": "C:\\Users\\65883\\Desktop\\Programming\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment.csproj",
       "packagesPath": "C:\\Users\\65883\\.nuget\\packages\\",
-      "outputPath": "D:\\Ngee-AnnPolytechnics-ICT\\Programming II\\Assignment\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment\\obj\\",
+      "outputPath": "C:\\Users\\65883\\Desktop\\Programming\\S10262474_PRG2Assignment\\S10262474_PRG2Assignment\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

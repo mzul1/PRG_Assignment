@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//==========================================================
+// Student Number : S10262474E
+// Student Name : Chew Jin Xuan
+// Partner Name : Zulhimi
+//==========================================================
 namespace S10262474_PRG2Assignment
 {
     class Cone : IceCream

@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//==========================================================
+// Student Number : S10262474
+// Student Name : Chew Jin Xuan
+// Partner Name : Zulhimi
+//==========================================================
 namespace S10262474_PRG2Assignment
 {
     class Order
@@ -33,7 +37,7 @@ namespace S10262474_PRG2Assignment
             IceCreamList[orderno].Flavours.Clear();
             Console.Write("Enter new flavour (or NIL to stop adding): ");
             string flavourtype = Console.ReadLine();
-            while (flavourtype != "nil")
+            while (flavourtype != "NIL")
             {
                 Console.Write("Is it premium? (True/False): ");
                 bool flavourpremium = Convert.ToBoolean(Console.ReadLine());
@@ -51,7 +55,7 @@ namespace S10262474_PRG2Assignment
             IceCreamList[orderno].Toppings.Clear();
             Console.Write("Enter new topping (or NIL to stop adding): ");
             string toppingtype = Console.ReadLine();
-            while (toppingtype != "nil")
+            while (toppingtype != "NIL")
             {
                 Topping topping = new Topping(toppingtype);
                 IceCreamList[orderno].Toppings.Add(topping);
@@ -79,7 +83,6 @@ namespace S10262474_PRG2Assignment
         }
         public override string ToString()
         {
-            //return "ID: " + Id + "\tTime Received: " + TimeReceived + "\tTime Fulfilled: " + TimeFulfilled + "\tIceCreamList: " + IceCreamList.ToString();
             string iceCreamDetails = string.Join("; ", IceCreamList.Select(iceCream => iceCream.ToString()));
             return $"ID: {Id}   Time Received: {TimeReceived:dd/MM/yyyy h:mm:ss tt}    Time Fulfilled: {TimeFulfilled?.ToString("dd/MM/yyyy h:mm:ss tt")} IceCreamList: {iceCreamDetails}";
         }

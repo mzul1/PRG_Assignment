@@ -1,4 +1,11 @@
-﻿using S10262474_PRG2Assignment;
+﻿//==========================================================
+// Student Number : S10262474
+// Student Name : Chew Jin Xuan
+// Partner Name : Zulhimi
+//==========================================================
+
+// See https://aka.ms/new-console-template for more information
+using S10262474_PRG2Assignment;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -65,10 +72,6 @@ Tuple<Dictionary<int, Order>, Dictionary<int, int>> LoadOrders(string filePath)
     {
         string[] line = ordersFile[i].Split(",");
         int orderID = Convert.ToInt32(line[0]);
-
-        // No need to add the order here if it's already being added inside ProcessOrderLine
-        // Order order = ProcessOrderLine(orders, orderIDCustomerID, line, orderID);
-        // Instead, just call the method to process the line.
         ProcessOrderLine(orders, orderIDCustomerID, line, orderID);
     }
     return new Tuple<Dictionary<int, Order>, Dictionary<int, int>>(orders, orderIDCustomerID);
@@ -79,7 +82,6 @@ Order ProcessOrderLine(Dictionary<int, Order> orders, Dictionary<int, int> order
     Order order;
     if (!orders.ContainsKey(orderID))
     {
-        // Only create and add a new order if it doesn't exist in the dictionary
         order = new Order(orderID, DateTime.Parse(line[2]));
         order.TimeFulfilled = DateTime.Parse(line[3]);
         orders.Add(orderID, order);
@@ -87,20 +89,13 @@ Order ProcessOrderLine(Dictionary<int, Order> orders, Dictionary<int, int> order
     }
     else
     {
-        // If the order already exists, retrieve it from the dictionary
         order = orders[orderID];
     }
 
     IceCream iceCream = CreateIceCream(line);
     order.AddIceCream(iceCream);
     return order;
-
-
-
-    
 }
-
-
 
 IceCream CreateIceCream(string[] line)
 {
@@ -166,25 +161,6 @@ void LinkOrdersToCustomers(Dictionary<int, Customer> customers, Dictionary<int, 
     }
 }
 
-
-
-//Menu
-/*int DisplayMenu()
-{
-    Console.WriteLine("-------------Menu-------------");
-    Console.WriteLine("[1] List all customers");
-    Console.WriteLine("[2] List all current orders");
-    Console.WriteLine("[3] Register a new customer");
-    Console.WriteLine("[4] Create a customer's order");
-    Console.WriteLine("[5] Display order details of a customer");
-    Console.WriteLine("[6] Modify order details");
-    Console.WriteLine("[0] Exit");
-    Console.WriteLine();
-    Console.Write("Enter your choice: ");
-    int option = Convert.ToInt32(Console.ReadLine());
-    return option;
-}*/
-
 int DisplayMenu()
 {
     Console.WriteLine("-------------Menu-------------");
@@ -240,80 +216,25 @@ while (isRunning)
 }
 
 //basic feature 1 - List all customers
-/*void ListAllCustomers(Dictionary<int, Customer> customers)
-{
-Console.WriteLine("{0, -10} {1, -10} {2, -15} {3, -20} {4, -15} {5, -10} {6, -10} {7,-10}",
-    "Name", "MemberID", "DateOfBirth", "CurrentOrderID", "OrderHistoryID", "Points",
-    "PunchCard", "Tier");
-
-foreach (Customer customer in customers.Values)
-{
-    Console.WriteLine("{0, -10} {1, -10} {2, -15:dd/MM/yyyy} {3, -20} {4, -15} {5, -10} {6, -10} {7, -10}",
-        customer.Name, customer.MemberId, customer.Dob,
-        customer.CurrentOrder != null ? customer.CurrentOrder.Id.ToString() + 1 : "No Current Order",
-        string.Join(", ", customer.OrderHistory.Select(order => order.Id)),
-        customer.Rewards.Points,
-        customer.Rewards.PunchCard,
-        customer.Rewards.Tier);
-}
-Console.WriteLine();
-}*/
-
-//basic feature 1 - List all customers
 void ListAllCustomers(Dictionary<int, Customer> customers)
 {
-    Console.WriteLine("{0, -10} {1, -10} {2, -15} {3, -20} {4, -15} {5, -10} {6, -10} {7,-10}",
-        "Name", "MemberID", "DateOfBirth", "CurrentOrderID", "OrderHistoryID", "Points",
-        "PunchCard", "Tier");
+    Console.WriteLine("{0, -10} {1, -10} {2, -15} {3, -10} {4, -10} {5, -10} {6, 10} {7, 20}",
+        "Name", "MemberID", "DateOfBirth", "Points",
+        "PunchCard", "Tier", "CurrentOrderID", "OrderHistoryID");
 
     foreach (Customer customer in customers.Values)
     {
         string currentOrderID = customer.CurrentOrder != null ? (customer.CurrentOrder.Id + 1).ToString() : "No Current Order";
         string orderHistoryIDs = string.Join(", ", customer.OrderHistory.Select(order => order.Id));
 
-        Console.WriteLine("{0, -10} {1, -10} {2, -15:dd/MM/yyyy} {3, -20} {4, -15} {5, -10} {6, -10} {7, -10}", customer.Name, customer.MemberId, customer.Dob, currentOrderID, orderHistoryIDs, customer.Rewards.Points, customer.Rewards.PunchCard, customer.Rewards.Tier);
+        Console.WriteLine("{0, -10} {1, -10} {2, -15:dd/MM/yyyy} {3, -10} {4, -10} {5, -10} {6, -10} {7, 8}", customer.Name, customer.MemberId, customer.Dob, customer.Rewards.Points, customer.Rewards.PunchCard, customer.Rewards.Tier, currentOrderID, orderHistoryIDs);
     }
 
     Console.WriteLine();
 }
 
 //basic feature 2 - List all current orders
-/*void ListAllOrders(Dictionary<int, Customer> customers)
-{
-    Console.WriteLine("Current Orders: ");
-    foreach (Customer customer in customers.Values)
-    {
-        if (customer.CurrentOrder != null)
-        {
-            Console.WriteLine($"{customer.Name}'s Order: ");
-            Console.WriteLine($"Order ID: {customer.CurrentOrder.Id}");
-            Console.WriteLine($"Time Received: {customer.CurrentOrder.TimeReceived}");
-            foreach (IceCream iceCream in customer.CurrentOrder.IceCreamList)
-            {
-                Console.WriteLine($"Ice cream option: {iceCream.Option}");
-                Console.WriteLine($"Ice cream scoops: {iceCream.Scoops}");
-                Console.WriteLine("Ice cream flavours: ");
-                foreach (Flavour flav in iceCream.Flavours)
-                {
-                    Console.WriteLine(flav.ToString());
-                }
-                Console.WriteLine("Ice cream toppings: ");
-                foreach (Topping topping in iceCream.Toppings)
-                {
-                    Console.WriteLine(topping.ToString());
-                }
-            }
-            Console.WriteLine();
-        }
-        else
-        {
-            Console.WriteLine("No current orders.");
-        }
-    }
-    Console.WriteLine();
-}*/
-
-/*void ListAllOrders(Dictionary<int, Customer> customers)
+void ListAllOrders(Dictionary<int, Customer> customers)
 {
     Console.WriteLine("Current Orders:");
     bool hasOrders = false;
@@ -345,55 +266,9 @@ void ListAllCustomers(Dictionary<int, Customer> customers)
     }
 
     Console.WriteLine();
-}*/
-
-//basic feature 2 - List all current orders, the problem is not able to show everything from the order data file
-void ListAllOrders(Dictionary<int, Customer> customers)
-{
-    foreach (var orderPair in orders)
-    {
-        Order order = orderPair.Value;
-        Console.WriteLine(order.ToString());
-    }
 }
 
 //basic feature 3 - Register a new customer
-/*void NewCustomer(Dictionary<int, Customer> customers)
-{
-    Console.Write("Enter Name: ");
-    string name = Console.ReadLine();
-    Console.Write("Enter ID Number: ");
-    int id = Convert.ToInt32(Console.ReadLine());
-    Console.Write("Enter Date of Birth: ");
-    DateTime dob = DateTime.Parse(Console.ReadLine());
-
-    Customer customer = new Customer(name, id, dob);
-    PointCard pointCard = new PointCard();
-    pointCard.Tier = "Ordinary";
-    customer.Rewards = pointCard;
-    customers.Add(id, customer);
-    string data = name + "," + id + "," + dob.ToString();
-
-    using (StreamWriter sw = new StreamWriter("customers.csv", true))
-    {
-        sw.WriteLine(data);
-    }
-
-    if (customers.ContainsKey(id))
-    {
-        Console.WriteLine();
-        Console.WriteLine("Customer resgistered successfully!");
-        Console.WriteLine();
-    }
-    else
-    {
-        Console.WriteLine();
-        Console.WriteLine("Customer resistration failed!");
-        Console.WriteLine();
-    }
-}*/
-
-//basic feature 3 - Register a new customer, only the name, ID Number, Date of Birth append to the customers data file, it should also have the ordinary, 0, 0 be included when a new customer is register
 void NewCustomer(Dictionary<int, Customer> customers)
 {
     Console.Write("Enter Name: ");
@@ -420,148 +295,13 @@ void NewCustomer(Dictionary<int, Customer> customers)
         Customer customer = new Customer(name, id, dob);
         customer.Rewards = new PointCard { Tier = "Ordinary" };
         customers.Add(id, customer);
-        string data = $"{name},{id},{dob:yyyy-MM-dd}";
+        string data = $"{name},{id},{dob:yyyy-MM-dd}, {customer.Rewards.Tier}, {customer.Rewards.Points}, {customer.Rewards.PunchCard}";
 
         File.AppendAllText("customers.csv", data + Environment.NewLine);
 
         Console.WriteLine("\nCustomer registered successfully!\n");
     }
 }
-
-//basic feature 4 - Create customer's order
-/*void CreateCustomerOrder(Dictionary<int, Customer> customers, Dictionary<int, Order> orders)
-{
-    ListAllCustomers(customers);
-    Console.WriteLine();
-    Console.Write("Enter your customer ID: ");
-    int id = Convert.ToInt32(Console.ReadLine());
-    Customer customer = customers[id];
-
-    Order order = new Order();
-
-    Console.Write("Enter option: ");
-    string option = Console.ReadLine();
-    Console.Write("Enter number of scoops: ");
-    int scoopnum = Convert.ToInt32(Console.ReadLine());
-    List<Flavour> flavours = new List<Flavour>();
-    Console.Write("Enter flavour type (or nil to stop adding): ");
-    string flavourtype = Console.ReadLine();
-    while (flavourtype != "nil")
-    {
-        Console.Write("Is it premium? (True/False): ");
-        bool flavourpremium = Convert.ToBoolean(Console.ReadLine());
-        Console.Write("Enter flavour quantity: ");
-        int flavourquantity = Convert.ToInt32(Console.ReadLine());
-        Flavour flavour = new Flavour(flavourtype, flavourpremium, flavourquantity);
-        flavours.Add(flavour);
-        Console.Write("Enter flavour (or nil to stop adding): ");
-        flavourtype = Console.ReadLine();
-    }
-    List<Topping> toppings = new List<Topping>();
-    Console.Write("Enter topping (or nil to stop adding): ");
-    string toppingtype = Console.ReadLine();
-    while (toppingtype != "nil")
-    {
-        Topping topping = new Topping(toppingtype);
-        toppings.Add(topping);
-        Console.Write("Enter topping (or nil to stop adding): ");
-        toppingtype = Console.ReadLine();
-    }
-
-    IceCream iceCream = null;
-    switch (option)
-    {
-        case "Waffle":
-            Console.Write("Enter waffle flavour: ");
-            string waffleflavour = Console.ReadLine();
-            iceCream = new Waffle("Waffle", scoopnum, flavours, toppings, waffleflavour);
-            break;
-        case "Cone":
-            Console.Write("Is cone dipped? (True/False): ");
-            bool dipped = Convert.ToBoolean(Console.ReadLine());
-            iceCream = new Cone("Cone", scoopnum, flavours, toppings, dipped);
-            break;
-        case "Cup":
-            iceCream = new Cup("Cup", scoopnum, flavours, toppings);
-            break;
-    }
-    order.AddIceCream(iceCream);
-
-    Console.Write("Add Another Ice Cream? [Y/N]: ");
-    string addicecream = Console.ReadLine();
-    while (addicecream == "Y")
-    {
-        Console.Write("Enter option: ");
-        option = Console.ReadLine();
-        Console.Write("Enter number of scoops: ");
-        scoopnum = Convert.ToInt32(Console.ReadLine());
-        flavours = new List<Flavour>();
-        Console.Write("Enter flavour type (or nil to stop adding): ");
-        flavourtype = Console.ReadLine();
-        while (flavourtype != "nil")
-        {
-            Console.Write("Is it premium? (True/False): ");
-            bool flavourpremium = Convert.ToBoolean(Console.ReadLine());
-            Console.Write("Enter flavour quantity: ");
-            int flavourquantity = Convert.ToInt32(Console.ReadLine());
-            Flavour flavour = new Flavour(flavourtype, flavourpremium, flavourquantity);
-            flavours.Add(flavour);
-            Console.Write("Enter flavour (or nil to stop adding): ");
-            flavourtype = Console.ReadLine();
-        }
-        toppings = new List<Topping>();
-        Console.Write("Enter topping (or nil to stop adding): ");
-        toppingtype = Console.ReadLine();
-        while (toppingtype != "nil")
-        {
-            Topping topping = new Topping(toppingtype);
-            toppings.Add(topping);
-            Console.Write("Enter topping (or nil to stop adding): ");
-            toppingtype = Console.ReadLine();
-        }
-
-        iceCream = null;
-        switch (option)
-        {
-            case "Waffle":
-                Console.Write("Enter waffle flavour: ");
-                string waffleflavour = Console.ReadLine();
-                iceCream = new Waffle("Waffle", scoopnum, flavours, toppings, waffleflavour);
-                break;
-            case "Cone":
-                Console.Write("Is cone dipped? (True/False): ");
-                bool dipped = Convert.ToBoolean(Console.ReadLine());
-                iceCream = new Cone("Cone", scoopnum, flavours, toppings, dipped);
-                break;
-            case "Cup":
-                iceCream = new Cup("Cup", scoopnum, flavours, toppings);
-                break;
-        }
-        order.AddIceCream(iceCream);
-    }
-    
-
-    customer.CurrentOrder = order;
-    orders.Add(orders.Count + 1, order);
-
-    if (customer.Rewards.Tier == "Gold")
-    {
-        goldqueue.Enqueue(order);
-    }
-    else
-    {
-        orderqueue.Enqueue(order);
-    }
-
-    if (orders.ContainsValue(order))
-    {
-        Console.WriteLine("Order made successfully!");
-    }
-    else
-    {
-        Console.WriteLine("Order made failed!");
-    }
-}*/
 
 //basic feature 4 - Create customer's order
 void CreateCustomerOrder(Dictionary<int, Customer> customers, Dictionary<int, Order> orders)
@@ -620,9 +360,9 @@ List<Flavour> GetFlavoursFromUser()
     string flavourType;
     do
     {
-        Console.Write("Enter flavour type (or 'nil' to stop adding): ");
+        Console.Write("Enter flavour type (or 'NIL' to stop adding): ");
         flavourType = Console.ReadLine();
-        if (flavourType == "nil") break;
+        if (flavourType == "NIL") break;
 
         Console.Write("Is it premium? (True/False): ");
         bool isPremium = Convert.ToBoolean(Console.ReadLine());
@@ -630,7 +370,7 @@ List<Flavour> GetFlavoursFromUser()
         int quantity = Convert.ToInt32(Console.ReadLine());
 
         flavours.Add(new Flavour(flavourType, isPremium, quantity));
-    } while (flavourType != "nil");
+    } while (flavourType != "NIL");
 
     return flavours;
 }
@@ -641,12 +381,12 @@ List<Topping> GetToppingsFromUser()
     string toppingType;
     do
     {
-        Console.Write("Enter topping (or 'nil' to stop adding): ");
+        Console.Write("Enter topping (or 'NIL' to stop adding): ");
         toppingType = Console.ReadLine();
-        if (toppingType == "nil") break;
+        if (toppingType == "NIL") break;
 
         toppings.Add(new Topping(toppingType));
-    } while (toppingType != "nil");
+    } while (toppingType != "NIL");
 
     return toppings;
 }
@@ -668,72 +408,6 @@ IceCream CreateIceCreams(string option, int scoops, List<Flavour> flavours, List
             return null;
     }
 }
-
-//basic feature 5 - Display order details of a customer
-/*void DisplayOrderDetailsOfCustomer(Dictionary<int, Customer> customers)
-{
-    ListAllCustomers(customers);
-    Console.WriteLine();
-    Console.Write("Enter your customer ID: ");
-    int id = Convert.ToInt32(Console.ReadLine());
-    Customer customer = customers[id];
-
-    Console.WriteLine();
-    foreach (Order order in customer.OrderHistory)
-    {
-        if (order != null)
-        {
-            Console.WriteLine($"Time Received: {order.TimeReceived}");
-            foreach (IceCream iceCream in order.IceCreamList)
-            {
-                Console.WriteLine($"Ice cream option: {iceCream.Option}");
-                Console.WriteLine($"Ice cream scoops: {iceCream.Scoops}");
-                Console.WriteLine("Ice cream flavours: ");
-                foreach (Flavour flav in iceCream.Flavours)
-                {
-                    Console.WriteLine(flav.ToString());
-                }
-                Console.WriteLine("Ice cream toppings: ");
-                foreach (Topping topping in iceCream.Toppings)
-                {
-                    Console.WriteLine(topping.ToString());
-                }
-            }
-            Console.WriteLine();
-        }
-        else
-        {
-            Console.WriteLine("No previous orders.");
-            break;
-        }
-    }
-    if (customer.CurrentOrder != null)
-    {
-        Console.WriteLine($"{customer.Name}'s Order: ");
-        Console.WriteLine($"Order ID: {customer.CurrentOrder.Id}");
-        Console.WriteLine($"Time Received: {customer.CurrentOrder.TimeReceived}");
-        foreach (IceCream iceCream in customer.CurrentOrder.IceCreamList)
-        {
-            Console.WriteLine($"Ice cream option: {iceCream.Option}");
-            Console.WriteLine($"Ice cream scoops: {iceCream.Scoops}");
-            Console.WriteLine("Ice cream flavours: ");
-            foreach (Flavour flav in iceCream.Flavours)
-            {
-                Console.WriteLine(flav.ToString());
-            }
-            Console.WriteLine("Ice cream toppings: ");
-            foreach (Topping topping in iceCream.Toppings)
-            {
-                Console.WriteLine(topping.ToString());
-            }
-        }
-        Console.WriteLine();
-    }
-    else
-    {
-        Console.WriteLine("No current orders.");
-    }
-}*/
 
 //basic feature 5 - Display order details of a customer
 void DisplayOrderDetailsOfCustomer(Dictionary<int, Customer> customers)
@@ -850,9 +524,9 @@ void ModifyOrderDetails(Dictionary<int, Customer> customers)
             Console.WriteLine("Enter number of scoops: ");
             int scoopnum = Convert.ToInt32(Console.ReadLine());
             List<Flavour> flavours = new List<Flavour>();
-            Console.WriteLine("Enter flavour type (or nil to stop adding): ");
+            Console.WriteLine("Enter flavour type (or NIL to stop adding): ");
             string flavourtype = Console.ReadLine();
-            while (flavourtype != "nil")
+            while (flavourtype != "NIL")
             {
                 Console.WriteLine("Is it premium? (True/False): ");
                 bool flavourpremium = Convert.ToBoolean(Console.ReadLine());
@@ -860,17 +534,17 @@ void ModifyOrderDetails(Dictionary<int, Customer> customers)
                 int flavourquantity = Convert.ToInt32(Console.ReadLine());
                 Flavour flavour = new Flavour(flavourtype, flavourpremium, flavourquantity);
                 flavours.Add(flavour);
-                Console.WriteLine("Enter flavour (or nil to stop adding): ");
+                Console.WriteLine("Enter flavour (or NIL to stop adding): ");
                 flavourtype = Console.ReadLine();
             }
             List<Topping> toppings = new List<Topping>();
-            Console.WriteLine("Enter topping (or nil to stop adding): ");
+            Console.WriteLine("Enter topping (or NIL to stop adding): ");
             string toppingtype = Console.ReadLine();
-            while (toppingtype != "nil")
+            while (toppingtype != "NIL")
             {
                 Topping topping = new Topping(toppingtype);
                 toppings.Add(topping);
-                Console.WriteLine("Enter topping (or nil to stop adding): ");
+                Console.WriteLine("Enter topping (or NIL to stop adding): ");
                 toppingtype = Console.ReadLine();
             }
 
@@ -937,108 +611,6 @@ void ModifyOrderDetails(Dictionary<int, Customer> customers)
 
 //advanced features - a
 
-
-//advanced features - b - display monthly charged amounts breakdown & total charged amounts for the year
-/*void DisplayChargedAmounts(Dictionary<int, Order> orders)
-{
-    Console.Write("Enter the year: ");
-    int year = Convert.ToInt32(Console.ReadLine());
-    Dictionary<DateTime, Order> OrdersInYear = new Dictionary<DateTime, Order>();
-    foreach (Order order in orders.Values)
-    {
-        DateTime orderDateTime = (DateTime)order.TimeFulfilled;
-        int orderyear = orderDateTime.Year;
-        if (orderyear == year)
-        {
-            OrdersInYear.Add(orderDateTime, order);
-        }
-        else continue;
-    }
-    double janTotal = 0;
-    double febTotal = 0;
-    double marTotal = 0;
-    double aprTotal = 0;
-    double mayTotal = 0;
-    double junTotal = 0;
-    double julTotal = 0;
-    double augTotal = 0;
-    double sepTotal = 0;
-    double octTotal = 0;
-    double novTotal = 0;
-    double decTotal = 0;
-    double overallTotal = 0;
-
-    foreach (KeyValuePair<DateTime, Order> pair in OrdersInYear)
-    {
-        if (pair.Key.Month == 1)
-        {
-            janTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 2)
-        {
-            febTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 3)
-        {
-            marTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 4)
-        {
-            aprTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 5)
-        {
-            mayTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 6)
-        {
-            junTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 7)
-        {
-            julTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 8)
-        {
-            augTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 9)
-        {
-            sepTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 10)
-        {
-            octTotal += pair.Value.CalculateTotal();
-        }
-        else if (pair.Key.Month == 11)
-        {
-            novTotal += pair.Value.CalculateTotal();
-        }
-        else
-        {
-            decTotal += pair.Value.CalculateTotal();
-        }
-    }
-    overallTotal = janTotal + febTotal + marTotal + aprTotal + mayTotal + junTotal +
-        julTotal + augTotal + sepTotal + octTotal + novTotal + decTotal;
-
-    Console.WriteLine();
-    Console.WriteLine("Jan {0}: ${1}", year, janTotal.ToString("0.00"));
-    Console.WriteLine("Feb {0}: ${1}", year, febTotal.ToString("0.00"));
-    Console.WriteLine("Mar {0}: ${1}", year, marTotal.ToString("0.00"));
-    Console.WriteLine("Apr {0}: ${1}", year, aprTotal.ToString("0.00"));
-    Console.WriteLine("May {0}: ${1}", year, mayTotal.ToString("0.00"));
-    Console.WriteLine("Jun {0}: ${1}", year, junTotal.ToString("0.00"));
-    Console.WriteLine("Jul {0}: ${1}", year, julTotal.ToString("0.00"));
-    Console.WriteLine("Aug {0}: ${1}", year, augTotal.ToString("0.00"));
-    Console.WriteLine("Sep {0}: ${1}", year, sepTotal.ToString("0.00"));
-    Console.WriteLine("Oct {0}: ${1}", year, octTotal.ToString("0.00"));
-    Console.WriteLine("Nov {0}: ${1}", year, novTotal.ToString("0.00"));
-    Console.WriteLine("Dec {0}: ${1}", year, decTotal.ToString("0.00"));
-    Console.WriteLine();
-    Console.WriteLine("Total: ${0}", overallTotal.ToString("0.00"));
-}*/
-
 //advanced features - b - display monthly charged amounts breakdown & total charged amounts for the year
 void DisplayChargedAmounts(Dictionary<int, Order> orders)
 {
@@ -1067,42 +639,7 @@ void DisplayChargedAmounts(Dictionary<int, Order> orders)
     Console.WriteLine("Total: ${0:0.00}", overallTotal);
 }
 
-
-/*int option = DisplayMenu();
-while (option != 0)
-{
-    if (option == 1)
-    {
-        ListAllCustomers(customers);
-    }
-    else if (option == 2)
-    {
-        ListAllOrders(customers);
-    }
-    else if (option == 3)
-    {
-        NewCustomer(customers);
-    }
-    else if (option == 4)
-    {
-        CreateCustomerOrder(customers, orders);
-    }
-    else if (option == 5)
-    {
-        DisplayOrderDetailsOfCustomer(customers);
-    }
-    else
-    {
-        ModifyOrderDetails(customers);
-    }
-    Console.WriteLine();
-    option = DisplayMenu();
-}*/
-
 DisplayChargedAmounts(orders);
-
-
-
 
 
 
