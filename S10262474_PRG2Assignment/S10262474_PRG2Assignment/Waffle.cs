@@ -1,13 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//==========================================================
-// Student Number : S10262474
-// Student Name : Chew Jin Xuan
-// Partner Name : Zulhimi
-//==========================================================
+
 namespace S10262474_PRG2Assignment
 {
     class Waffle : IceCream
@@ -60,4 +56,4 @@ namespace S10262474_PRG2Assignment
             return base.ToString() + "\tWaffle Flavour: " + WaffleFlavour;
         }
     }
-  }
+}
