@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//==========================================================
-// Student Number : S10262474
-// Student Name : Chew Jin Xuan
-// Partner Name : Zulhimi
-//==========================================================
+
 namespace S10262474_PRG2Assignment
 {
     class Customer
@@ -27,8 +23,23 @@ namespace S10262474_PRG2Assignment
         }
         public Order MakeOrder()
         {
-            Console.WriteLine("Enter order id: ");
-            int id = Convert.ToInt32(Console.ReadLine());
+            bool InvalidID = false;
+            int id;
+
+            do
+            {
+                Console.WriteLine("Enter order id: ");
+                if (!int.TryParse(Console.ReadLine(), out id))
+                {
+                    InvalidID = true;
+                }
+                else
+                {
+                    InvalidID = false;
+                }
+            } while (InvalidID);
+
+
             foreach (Order o in OrderHistory)
             {
                 if (o.Id == id)
