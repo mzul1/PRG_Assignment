@@ -1,13 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//==========================================================
-// Student Number : S10262474
-// Student Name : Chew Jin Xuan
-// Partner Name : Zulhimi
-//==========================================================
+
 namespace S10262474_PRG2Assignment
 {
     class PointCard
@@ -37,12 +33,13 @@ namespace S10262474_PRG2Assignment
             }
             else
             {
-                PunchCard = 0;
+                PunchCard = 10;
             }
         }
         public override string ToString()
         {
-            return "Points: " + Points + "\tPunch Card: " + PunchCard + "\tTier: " + Tier;
+            return "Points: " + Points + "\tPunch Card: " + PunchCard +
+                "\tTier: " + Tier;
         }
     }
 }
